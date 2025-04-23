@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rewards - Social App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      transition: direction 0.3s ease;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .reward-item {
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .lang-select {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-select">
+      <label for="languageSelect" class="form-label" style="color: white;">Language / اللغة:</label>
+      <select id="languageSelect" class="form-select w-auto d-inline-block">
+        <option value="en" selected>English</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+    <h1 id="pageTitle">User Rewards</h1>
+    <div id="rewardsList">
+      <div class="reward-item" tabindex="0">
+        <h3 id="reward1Title">Top Commenter</h3>
+        <p id="reward1Desc">Earned for most comments in a week</p>
+      </div>
+      <div class="reward-item" tabindex="0">
+        <h3 id="reward2Title">Popular Streamer</h3>
+        <p id="reward2Desc">Earned for highest live stream views</p>
+      </div>
+      <div class="reward-item" tabindex="0">
+        <h3 id="reward3Title">Community Helper</h3>
+        <p id="reward3Desc">Earned for helping other users</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const translations = {
+      en: {
+        pageTitle: "User Rewards",
+        reward1Title: "Top Commenter",
+        reward1Desc: "Earned for most comments in a week",
+        reward2Title: "Popular Streamer",
+        reward2Desc: "Earned for highest live stream views",
+        reward3Title: "Community Helper",
+        reward3Desc: "Earned for helping other users"
+      },
+      ar: {
+        pageTitle: "مكافآت المستخدم",
+        reward1Title: "أفضل معلق",
+        reward1Desc: "مُنحت لأكثر التعليقات خلال الأسبوع",
+        reward2Title: "المذيع الشهير",
+        reward2Desc: "مُنحت لأعلى عدد مشاهدات للبث المباشر",
+        reward3Title: "مساعد المجتمع",
+        reward3Desc: "مُنحت لمساعدة المستخدمين الآخرين"
+      }
+    };
+
+    const languageSelect = document.getElementById('languageSelect');
+    const pageTitle = document.getElementById('pageTitle');
+    const reward1Title = document.getElementById('reward1Title');
+    const reward1Desc = document.getElementById('reward1Desc');
+    const reward2Title = document.getElementById('reward2Title');
+    const reward2Desc = document.getElementById('reward2Desc');
+    const reward3Title = document.getElementById('reward3Title');
+    const reward3Desc = document.getElementById('reward3Desc');
+
+    function updateTexts(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      pageTitle.textContent = translations[lang].pageTitle;
+      reward1Title.textContent = translations[lang].reward1Title;
+      reward1Desc.textContent = translations[lang].reward1Desc;
+      reward2Title.textContent = translations[lang].reward2Title;
+      reward2Desc.textContent = translations[lang].reward2Desc;
+      reward3Title.textContent = translations[lang].reward3Title;
+      reward3Desc.textContent = translations[lang].reward3Desc;
+    }
+
+    languageSelect.addEventListener('change', (e) => {
+      updateTexts(e.target.value);
+    });
+
+    // Initialize
+    updateTexts(languageSelect.value);
+  </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Subscriptions - Social App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      transition: direction 0.3s ease;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .subscription-plan {
+      background: rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .subscription-plan:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
+    .btn-primary {
+      background-color: #ff6f91;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #ff4a75;
+    }
+    .lang-select {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lang-select">
+      <label for="languageSelect" class="form-label" style="color: white;">Language / اللغة:</label>
+      <select id="languageSelect" class="form-select w-auto d-inline-block">
+        <option value="en" selected>English</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+    <h1 id="pageTitle">Subscription Plans</h1>
+    <div id="plansContainer">
+      <div class="subscription-plan" tabindex="0">
+        <h3 id="basicPlanTitle">Basic Plan</h3>
+        <p id="basicPlanDesc">Access to basic features</p>
+        <p id="basicPlanPrice">$5 / month</p>
+        <button class="btn btn-primary" id="subscribeBasicBtn">Subscribe</button>
+      </div>
+      <div class="subscription-plan" tabindex="0">
+        <h3 id="premiumPlanTitle">Premium Plan</h3>
+        <p id="premiumPlanDesc">Access to all features including live streaming</p>
+        <p id="premiumPlanPrice">$15 / month</p>
+        <button class="btn btn-primary" id="subscribePremiumBtn">Subscribe</button>
+      </div>
+    </div>
+    <div id="message" style="margin-top: 1rem; text-align: center;"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const translations = {
+      en: {
+        pageTitle: "Subscription Plans",
+        basicPlanTitle: "Basic Plan",
+        basicPlanDesc: "Access to basic features",
+        basicPlanPrice: "$5 / month",
+        premiumPlanTitle: "Premium Plan",
+        premiumPlanDesc: "Access to all features including live streaming",
+        premiumPlanPrice: "$15 / month",
+        subscribeBtn: "Subscribe",
+        subscribeSuccess: "Subscription successful!",
+        subscribeFailed: "Subscription failed."
+      },
+      ar: {
+        pageTitle: "خطط الاشتراك",
+        basicPlanTitle: "الخطة الأساسية",
+        basicPlanDesc: "الوصول إلى الميزات الأساسية",
+        basicPlanPrice: "5 دولار / شهر",
+        premiumPlanTitle: "الخطة المميزة",
+        premiumPlanDesc: "الوصول إلى جميع الميزات بما في ذلك البث المباشر",
+        premiumPlanPrice: "15 دولار / شهر",
+        subscribeBtn: "اشترك",
+        subscribeSuccess: "تم الاشتراك بنجاح!",
+        subscribeFailed: "فشل الاشتراك."
+      }
+    };
+
+    const languageSelect = document.getElementById('languageSelect');
+    const pageTitle = document.getElementById('pageTitle');
+    const basicPlanTitle = document.getElementById('basicPlanTitle');
+    const basicPlanDesc = document.getElementById('basicPlanDesc');
+    const basicPlanPrice = document.getElementById('basicPlanPrice');
+    const premiumPlanTitle = document.getElementById('premiumPlanTitle');
+    const premiumPlanDesc = document.getElementById('premiumPlanDesc');
+    const premiumPlanPrice = document.getElementById('premiumPlanPrice');
+    const subscribeBasicBtn = document.getElementById('subscribeBasicBtn');
+    const subscribePremiumBtn = document.getElementById('subscribePremiumBtn');
+    const messageDiv = document.getElementById('message');
+
+    function updateTexts(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      pageTitle.textContent = translations[lang].pageTitle;
+      basicPlanTitle.textContent = translations[lang].basicPlanTitle;
+      basicPlanDesc.textContent = translations[lang].basicPlanDesc;
+      basicPlanPrice.textContent = translations[lang].basicPlanPrice;
+      premiumPlanTitle.textContent = translations[lang].premiumPlanTitle;
+      premiumPlanDesc.textContent = translations[lang].premiumPlanDesc;
+      premiumPlanPrice.textContent = translations[lang].premiumPlanPrice;
+      subscribeBasicBtn.textContent = translations[lang].subscribeBtn;
+      subscribePremiumBtn.textContent = translations[lang].subscribeBtn;
+    }
+
+    languageSelect.addEventListener('change', (e) => {
+      updateTexts(e.target.value);
+      clearMessage();
+    });
+
+    subscribeBasicBtn.addEventListener('click', () => {
+      clearMessage();
+      // Placeholder for subscription logic
+      setTimeout(() => {
+        messageDiv.textContent = translations[languageSelect.value].subscribeSuccess;
+      }, 500);
+    });
+
+    subscribePremiumBtn.addEventListener('click', () => {
+      clearMessage();
+      // Placeholder for subscription logic
+      setTimeout(() => {
+        messageDiv.textContent = translations[languageSelect.value].subscribeSuccess;
+      }, 500);
+    });
+
+    function clearMessage() {
+      messageDiv.textContent = '';
+    }
+
+    // Initialize
+    updateTexts(languageSelect.value);
+  </script>
+</body>
+</html>
